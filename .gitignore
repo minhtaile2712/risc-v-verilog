@@ -1,0 +1,6 @@
+*.ini
+*.wlf
+
+controll_unit_design/
+riscv/
+work/
