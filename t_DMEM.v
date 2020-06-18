@@ -1,4 +1,4 @@
-module test_DMEM();
+module test_DMEM;
 parameter WIDTH = 32; // Width of input data and output data in bits
 parameter MEM_WIDTH = 8; // Width of memory in bits
 parameter MEM_DEPTH = 1024; // Depth of memory in units

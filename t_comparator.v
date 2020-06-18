@@ -4,7 +4,7 @@ reg cmpop;
 reg [WIDTH-1:0] rs1_out, rs2_out;
 wire br_eq, br_lt;
 
-comparator comparator(cmpop, rs1_out, rs2_out, br_eq, br_lt);
+comparator dut(cmpop, rs1_out, rs2_out, br_eq, br_lt);
 
 initial begin
     #0 cmpop = 0;  rs1_out = 0; rs2_out = 0;

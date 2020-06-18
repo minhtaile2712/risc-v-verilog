@@ -37,5 +37,5 @@ assign imm_out = (imm_sel == 3'b000) ? ({{21{inst[31]}}, inst[30:20]}) : // I-im
                     (imm_sel == 3'b010) ? {{20{inst[31]}}, inst[7], inst[30:25], inst[11:8], 1'b0} : // B-immediate
                     (imm_sel == 3'b011) ? {inst[31:12], 12'b0} : // U-immediate
                     (imm_sel == 3'b110) ? {{11{inst[31]}}, inst[19:12], inst[20], inst[30:21], 1'b0} : // J-immediate
-                    31'b0; // Error!!!
+                    32'hDEADBEEF; // Error!!!
 endmodule

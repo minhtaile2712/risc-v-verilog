@@ -1,4 +1,4 @@
-module test_cpu();
+module test_cpu;
 reg clk, reset;
 
 cpu dut(clk, reset);
