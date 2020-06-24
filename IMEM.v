@@ -1,36 +1,25 @@
-/*
- ***@Author: NGUYEN TRUNG HIEU
- ***@Date:   Nov 1st, 2018
-*/
+module IMEM (inst, PC);
+parameter FIRST_PC = 32'h00000000;
+parameter NUM_OF_BITS = 22;
+parameter MEM_DEPTH = 1 << NUM_OF_BITS; // 16MBytes (2^24 bytes) - 4MWords (2^22 words)
 
-/******** Instruction Memmory Block ********/
-module IMEM(inst,PC);
-parameter	INST_WIDTH_LENGTH = 32;
-parameter	PC_WIDTH_LENGTH = 32;
-parameter	MEM_WIDTH_LENGTH = 32;
-parameter	MEM_DEPTH = 1<<18;
-output	reg	[INST_WIDTH_LENGTH-1:0]inst;
-input		[PC_WIDTH_LENGTH-1:0]PC;
+input [31:0] PC;
+output reg [31:0] inst;
 
-/********* Instruction Memmory *************/
-reg		[MEM_WIDTH_LENGTH-1:0]IMEM[0:MEM_DEPTH-1];
+reg [31:0] IMEM[0:MEM_DEPTH-1];
+wire [NUM_OF_BITS-1:0] pWord;
+wire [1:0] pByte;
 
-wire		[17:0]pWord;
-wire		[1:0]pByte;
-
-assign		pWord = PC[19:2];
-assign		pByte = PC[1:0];
+assign pWord = PC[NUM_OF_BITS+1:2];
+assign pByte = PC[1:0];
 
 initial begin
-$readmemh("D:/Documents_Study/Computer Architecture/RISC-V_project/TestCode/pipeline_test.txt",IMEM);
+	$readmemh("C:/workspace/rars/full_test.mem", IMEM, FIRST_PC >> 2); // first PC to upload code
 end
-
-always@(PC)
-begin
+always @(PC) begin
 	if (pByte == 2'b00)
 		inst <= IMEM[pWord];
 	else
 		inst <= 'hz;
 end
-
 endmodule
